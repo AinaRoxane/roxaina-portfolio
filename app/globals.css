@@ -211,6 +211,7 @@ a:hover {
 .nav-links a:hover::after {
   width: 100%;
 }
+
 .header-actions {
   display: flex;
   justify-content: flex-end;
@@ -603,6 +604,148 @@ a:hover {
 .exp-bullet-list li strong {
   color: var(--color-cream);
   font-weight: 500;
+}
+
+/* ============================================================
+   SCREENS
+   ============================================================ */
+.screens {
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: rgba(30, 47, 71, 0.25);
+  padding: 1.5rem;
+}
+
+.screens-carousel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.screens-viewport {
+  flex: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screens-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.screens-arrow {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.screens-arrow:hover {
+  color: var(--color-cream);
+  border-color: var(--color-bronze);
+}
+
+.screens-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.screens-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.screens-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-border);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+
+.screens-dot.active {
+  background: var(--color-bronze);
+}
+
+.screens-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.screens-company {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.screens-logo {
+  border-radius: 0.375rem;
+  object-fit: contain;
+}
+
+.screens-company-name {
+  color: var(--color-cream);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.screens-company-name:hover {
+  color: var(--color-bronze);
+}
+
+.screens-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.screens-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.screens-social-link:hover {
+  color: var(--color-cream);
+  border-color: var(--color-bronze);
+  text-decoration: none;
+}
+
+.screens-social-link svg {
+  width: 14px;
+  height: 14px;
 }
 
 /* ============================================================

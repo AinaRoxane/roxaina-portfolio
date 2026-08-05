@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import ExperienceSection from "./_components/ExperienceSection";
+import PortfolioContent from "./_components/PortfolioContent";
 
 export default function Home() {
   return (
@@ -140,19 +140,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============================================================
-            EXPERIENCE
-        ============================================================ */}
-        <section style={{ marginBottom: "4rem" }} id="experience">
-          <div className="section-header">
-            <h2>
-              <span className="slash">/</span> experience
-            </h2>
-            <span className="line"></span>
-          </div>
-
-          <ExperienceSection />
-        </section>
+        <PortfolioContent />
 
         {/* ============================================================
             FOOTER

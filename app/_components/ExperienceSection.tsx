@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 interface Experience {
   title: string;
   company: string;
@@ -60,7 +58,7 @@ const experienceData: Record<string, Experience> = {
   },
 };
 
-const navItems: { key: string; label: string }[] = [
+export const navItems: { key: string; label: string }[] = [
   { key: "efanamby-fulltime", label: "e‑Fanamby (2026)" },
   { key: "efanamby-intern", label: "e‑Fanamby (2025)" },
   { key: "fianarako", label: "Fianarako.io" },
@@ -68,8 +66,15 @@ const navItems: { key: string; label: string }[] = [
   { key: "outlier", label: "Outlier" },
 ];
 
-export default function ExperienceSection() {
-  const [activeKey, setActiveKey] = useState("efanamby-fulltime");
+interface ExperienceSectionProps {
+  activeKey: string;
+  onChange: (key: string) => void;
+}
+
+export default function ExperienceSection({
+  activeKey,
+  onChange,
+}: ExperienceSectionProps) {
   const data = experienceData[activeKey];
 
   return (
@@ -80,7 +85,7 @@ export default function ExperienceSection() {
             key={item.key}
             className={`exp-nav-item ${activeKey === item.key ? "active" : ""}`}
             data-key={item.key}
-            onClick={() => setActiveKey(item.key)}
+            onClick={() => onChange(item.key)}
           >
             {item.label}
           </button>
