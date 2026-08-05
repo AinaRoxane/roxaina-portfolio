@@ -13,7 +13,7 @@ const experienceData: Record<string, Experience> = {
   "efanamby-fulltime": {
     title: "FullStack Developer",
     company: "@ e‑Fanamby",
-    date: "JAN 2026 – PRESENT",
+    date: "JANUARY 2026 – PRESENT",
     bullets: [
       "Architected a modular SaaS platform for football analytics using Spring Boot, Next.js, and PostgreSQL.",
       "Designed 35+ REST APIs, 12+ database migrations, RBAC, subscriptions, and automated video pipelines (FFmpeg).",
@@ -24,7 +24,7 @@ const experienceData: Record<string, Experience> = {
   "efanamby-intern": {
     title: "Software Engineer (Intern)",
     company: "@ e‑Fanamby",
-    date: "JUL 2025 – DEC 2025",
+    date: "JULY 2025 – DECEMBER 2025",
     bullets: [
       "Built a desktop application that automatically generates match highlights using YOLO, Roboflow, FFmpeg, and Python (PySide).",
       "Trained computer vision models to identify teams, players, and passes – enabling automated tactical analysis without manual video editing.",
@@ -33,7 +33,7 @@ const experienceData: Record<string, Experience> = {
   fianarako: {
     title: "FullStack Developer & Data Engineer",
     company: "@ Fianarako.io (Freelance)",
-    date: "NOV 2025 – MAR 2026",
+    date: "NOVEMBER 2025 – MARCH 2026",
     bullets: [
       "Built complete school management modules (student progress, grades, attendance, payroll, finance) using Spring Boot, Next.js, PostgreSQL.",
       "Developed Python‑SQL ETL pipelines to migrate legacy databases to PostgreSQL with strict data validation.",
@@ -43,7 +43,7 @@ const experienceData: Record<string, Experience> = {
   kidinov: {
     title: "Frontend Engineer",
     company: "@ Kidinov (Freelance)",
-    date: "APR 2026 – MAY 2026",
+    date: "APRIL 2026 – MAY 2026",
     bullets: [
       "Built accessible React Native and TypeScript interfaces for families of children with neurodevelopmental disorders (ASD, ADHD, dyslexia).",
       "Focused on UX accessibility, ensuring the platform was intuitive and inclusive for all users.",
@@ -52,7 +52,7 @@ const experienceData: Record<string, Experience> = {
   outlier: {
     title: "Linguistic AI Specialist",
     company: "@ Outlier (Freelance)",
-    date: "AUG 2024 – JAN 2025",
+    date: "AUGUST 2024 – JANUARY 2025",
     bullets: [
       "Trained and aligned Large Language Models (LLMs) via RLHF (Reinforcement Learning from Human Feedback) workflows.",
       "Specialized in creative writing quality and French‑English translation accuracy for AI training data generation.",
