@@ -1,65 +1,166 @@
 import Image from "next/image";
 
+import ExperienceSection from "./_components/ExperienceSection";
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+    <>
+      {/* ============================================================
+          STARRY BACKGROUND
+      ============================================================ */}
+      <div className="starfield" aria-hidden="true">
+        <div className="stars"></div>
+        <div className="stars-small"></div>
+      </div>
+
+      {/* ============================================================
+          HEADER
+      ============================================================ */}
+      <header className="header" role="banner">
+        <div className="header-inner">
+          <div className="header-left-group">
+            <div className="logo">Roxane R.</div>
+            <nav className="nav-links" aria-label="Main navigation">
+              <a href="#home">Home</a>
+              <a href="#about">About</a>
+              <a href="#experience">Experience</a>
+            </nav>
+          </div>
+          <div className="header-actions">
+            <a href="mailto:roxane.rakotoarimanana@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </a>
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://linkedin.com/in/roxane-rakotoarimanana"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <svg viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      {/* ============================================================
+          MAIN CONTENT
+      ============================================================ */}
+      <main className="app">
+        {/* ============================================================
+            HERO
+        ============================================================ */}
+        <section id="home" className="hero-section">
+          <div className="hero-art">
+            {/* <Image
+              src="/images/Sans_titre_7_20260408223008-removebg-preview.png"
+              alt="Roxane illustration"
+              width={433}
+              height={577}
+              priority
+              className="hero-image"
+            /> */}
+          </div>
+          <div className="hero-content">
+            <h1>
+              hi, <span className="accent">roxane</span> here
+              <span className="blinking-cursor">|</span>
+            </h1>
+            <p>
+              FullStack developer and aspiring artist in Antananarivo.
+              I participate in building Madagascar{"'"}s next-generation infrastructure by day
+              and dedicate my nights to the creative community. Yes, I am always on the move (^-^)
+            </p>
+            <a href="mailto:roxane.rakotoarimanana@gmail.com" className="btn-say-hi">
+              <svg viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              Say hi!
+            </a>
+          </div>
+        </section>
+
+        {/* ============================================================
+            ABOUT
+        ============================================================ */}
+        <section style={{ marginBottom: "4rem" }} id="about">
+          <div className="section-header">
+            <h2>
+              <span className="slash">/</span> about me
+            </h2>
+            <span className="line"></span>
+          </div>
+
+          <div className="about-grid">
+            <div className="about-text">
+              <p>
+                I am currently a <strong>FullStack Developer</strong> at{" "}
+                <span className="highlight">e-Fanamby</span>, where I put my business
+                management, data analyst, computer vision and developer skills to work
+                for the continent{"'"}s future sports analytics platform. Previously, I
+                worked for{" "}
+                <a href="https://www.kidinov.fr/" target="_blank">
+                  Kidinov
+                </a>{" "}
+                and{" "}
+                <a href="https://fianarako.io/" target="_blank">
+                  Fianarako.io
+                </a>{" "}
+                as a freelancer to quick-start their platforms.
+              </p>
+              <p>Here are some technologies I have been working with:</p>
+              <div className="tech-grid">
+                <div className="tech-grid-item">Python</div>
+                <div className="tech-grid-item">Java</div>
+                <div className="tech-grid-item">Spring Boot</div>
+                <div className="tech-grid-item">Next.js</div>
+                <div className="tech-grid-item">PostgreSQL</div>
+                <div className="tech-grid-item">TypeScript</div>
+                <div className="tech-grid-item">React Native</div>
+                <div className="tech-grid-item">Docker</div>
+              </div>
+            </div>
+
+            <div className="about-image">
+              <Image
+                src="/images/Sans_titre_7_20260408223008-removebg-preview.png"
+                alt="Roxane artwork"
+                width={433}
+                height={577}
+                className="about-image-img"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            EXPERIENCE
+        ============================================================ */}
+        <section style={{ marginBottom: "4rem" }} id="experience">
+          <div className="section-header">
+            <h2>
+              <span className="slash">/</span> experience
+            </h2>
+            <span className="line"></span>
+          </div>
+
+          <ExperienceSection />
+        </section>
+
+        {/* ============================================================
+            FOOTER
+        ============================================================ */}
+        <footer className="footer">
+          <p>© 2026 Roxane Aina. Built with Next.js & Tailwind. Deployed on Vercel.</p>
+        </footer>
       </main>
-    </div>
+    </>
   );
 }
