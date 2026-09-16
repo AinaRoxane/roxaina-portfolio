@@ -8,9 +8,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Roxane · FullStack Developer & Artist",
+  title: "Roxane Aina · Portfolio",
   description:
-    "Portfolio of Roxane — FullStack developer and aspiring artist in Antananarivo, Madagascar.",
+    "Portfolio of Roxane — FullStack developer and aspiring author in Antananarivo, Madagascar.",
 };
 
 export default function RootLayout({
@@ -21,9 +21,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-bg text-ink font-sans leading-[1.6] antialiased">
+        {children}
+      </body>
     </html>
   );
 }

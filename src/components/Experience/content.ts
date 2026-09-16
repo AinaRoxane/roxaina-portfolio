@@ -1,13 +1,11 @@
-"use client";
-
-interface Experience {
+export interface Experience {
   title: string;
   company: string;
   date: string;
   bullets: string[];
 }
 
-const experienceData: Record<string, Experience> = {
+export const experienceData: Record<string, Experience> = {
   "efanamby-fulltime": {
     title: "FullStack Developer",
     company: "@ e‑Fanamby",
@@ -65,44 +63,3 @@ export const navItems: { key: string; label: string }[] = [
   { key: "kidinov", label: "Kidinov" },
   { key: "outlier", label: "Outlier" },
 ];
-
-interface ExperienceSectionProps {
-  activeKey: string;
-  onChange: (key: string) => void;
-}
-
-export default function ExperienceSection({
-  activeKey,
-  onChange,
-}: ExperienceSectionProps) {
-  const data = experienceData[activeKey];
-
-  return (
-    <div className="exp-layout">
-      <div className="exp-nav" id="expNav">
-        {navItems.map((item) => (
-          <button
-            key={item.key}
-            className={`exp-nav-item ${activeKey === item.key ? "active" : ""}`}
-            data-key={item.key}
-            onClick={() => onChange(item.key)}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="exp-details" id="expDetails">
-        <div className="exp-title">
-          {data.title} <span className="exp-company">{data.company}</span>
-        </div>
-        <span className="exp-date">{data.date}</span>
-        <ul className="exp-bullet-list">
-          {data.bullets.map((bullet, i) => (
-            <li key={i}>{bullet}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
