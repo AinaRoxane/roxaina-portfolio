@@ -66,11 +66,11 @@ export default function Projects() {
             )}
           </h3>
 
-          <p className="text-ink italic text-[0.89rem] leading-[1.5] mb-4">
+          <p className="text-ink italic text-[0.95rem] leading-[1.5] mb-4">
             {project.problematic}
           </p>
 
-          <p className="text-muted text-[0.95rem] leading-[1.7] mb-4">
+          <p className="text-muted text-[0.95rem] leading-[1.5] mb-4">
             {project.description}
           </p>
 
