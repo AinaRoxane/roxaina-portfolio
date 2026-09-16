@@ -1,9 +1,9 @@
 export const heroContent = {
-  greeting: "hey, there.",
+  greeting: "roxane, here.",
+  title:
+    "FullStack developer & author.",
   description:
-    "FullStack developer and aspiring author in Antananarivo. " +
-    "I participate in building Madagascar's next-generation infrastructure by day " +
-    "and dedicate my nights to the creative community. Yes, I am always on the move (^-^)",
+    "I architect solutions that move industries forward — from sports analytics to creative ecosystems. I turn complex problems into robust platforms, usable products, and stories that last.",
   email: "roxane.rakotoarimanana@gmail.com",
   cta: "Say hi!",
   image: {

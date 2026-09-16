@@ -15,7 +15,7 @@ export default function Experience() {
   const data = experienceData[activeKey];
 
   return (
-    <section id="experience" className="mb-16">
+    <section id="experience" className="mb-38">
       <SectionHeader title="experience" />
 
       <div className="flex flex-col md:flex-row gap-10 md:gap-14">
@@ -40,7 +40,7 @@ export default function Experience() {
           <span className="block text-xs uppercase text-muted tracking-[0.05em] mb-6">
             {data.date}
           </span>
-          <ul className="flex flex-col gap-4 m-0">
+          <ul className="flex flex-col gap-4 m-0 text-justify">
             {data.bullets.map((bullet, i) => (
               <li
                 key={i}

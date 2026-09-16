@@ -2,7 +2,7 @@ import HeroImage from "./HeroImage";
 import { heroContent } from "./content";
 
 export default function HeroSection() {
-  const { greeting, description, email, cta } = heroContent;
+  const { greeting, title, description, email, cta } = heroContent;
 
   return (
     <section
@@ -12,14 +12,18 @@ export default function HeroSection() {
       <HeroImage />
 
       <div>
-        <h1 className="text-[3rem] sm:text-[3.5rem] font-normal text-ink tracking-[-0.02em] mb-6 leading-[1.1]">
+        <h1 className="text-[2.5rem] sm:text-[3.5rem] font-normal text-ink tracking-[-0.02em] mb-6 leading-[1.1]">
           {greeting}
           <span className="inline-block text-ink font-light ml-0.5 animate-blink">
             |
           </span>
         </h1>
 
-        <p className="text-[1.1rem] text-muted max-w-[32rem] leading-[1.7] mb-8">
+        <p className="text-[0.95rem] text-ink font-semibold my-1">
+          {title}
+        </p>
+
+        <p className="text-[0.95rem] text-muted max-w-[32rem] leading-[1.7] mb-8">
           {description}
         </p>
 

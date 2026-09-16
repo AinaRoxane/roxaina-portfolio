@@ -23,31 +23,18 @@ function renderSegment(segment: TextSegment, key: number) {
 }
 
 export default function About() {
-  const { title, paragraphs, technologies } = aboutContent;
+  const { title, paragraphs } = aboutContent;
 
   return (
-    <section id="about" className="mb-16">
+    <section id="about" className="md:col-span-6">
       <SectionHeader title={title} />
 
-      <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-10 md:gap-12">
-        <div className="text-muted text-base leading-[1.8]">
-          {paragraphs.map((segments, i) => (
-            <p key={i} className="mb-6 last:mb-0">
-              {segments.map(renderSegment)}
-            </p>
-          ))}
-
-          <div className="grid grid-cols-2 gap-x-6 gap-y-2 mt-6 pl-2">
-            {technologies.map((tech) => (
-              <div
-                key={tech}
-                className="text-muted text-[0.95rem] flex items-center gap-2.5 before:content-['▸'] before:text-ink before:font-bold"
-              >
-                {tech}
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="text-muted text-base text-[0.95rem]  text-justify leading-[1.5]">
+        {paragraphs.map((segments, i) => (
+          <p key={i} className="mb-6 last:mb-0">
+            {segments.map(renderSegment)}
+          </p>
+        ))}
       </div>
     </section>
   );

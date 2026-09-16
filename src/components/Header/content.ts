@@ -3,7 +3,9 @@ export const headerContent = {
   nav: [
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
+    { label: "Stack", href: "#stack" },
     { label: "Experience", href: "#experience" },
+    { label: "Projects", href: "#projects" },
   ],
   email: "roxane.rakotoarimanana@gmail.com",
   socials: {
