@@ -54,7 +54,7 @@ const personSchema = {
 const projectSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Malagasy Chronicles",
+  name: "Chronicles MG",
   alternateName: "mdg-chronicles",
   applicationCategory: "Publishing",
   operatingSystem: "Web",
@@ -78,7 +78,7 @@ const mijerySchema = {
 };
 
 export const metadata: Metadata = {
-  title: "Roxane Aina | Full-Stack Developer",
+  title: "Roxane Aina · Portfolio",
   description:
     "Full-stack developer & author based in Antananarivo, Madagascar — open to remote & freelance. Spring Boot, Next.js, PostgreSQL. Currently Full-Stack Developer at e-Fanamby.",
   openGraph: {
