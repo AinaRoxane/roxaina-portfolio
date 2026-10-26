@@ -1,0 +1,25 @@
+# roxaina.me
+
+> Portfolio of Roxane Aina, a full-stack developer and author based in Madagascar.
+> Currently Full-Stack Developer at e-Fanamby (Jan 2026–present).
+
+## About
+Full-stack developer building data-driven platforms in Madagascar.
+I'm building shared infrastructure for Malagasy products — identity first, because it's the layer everything else depends on.
+Stack: Spring Boot, Next.js, PostgreSQL, TypeScript, Python, Docker, OAuth2, OIDC, JWT, RS256, JWKS, PKCE.
+
+## Experience
+- e-Fanamby — Full-Stack Developer (2026–present)
+- e-Fanamby — Software Engineer, Intern (Jul–Dec 2025)
+- Outlier — Linguistic AI Specialist, Freelance (Aug 2024–Jan 2025)
+
+## Projects
+- MIJERY ID — OAuth2/OIDC identity provider for Malagasy applications (Spring Boot, PostgreSQL, OAuth2, OIDC, PKCE, RS256, JWKS)
+  URL: https://mijery.mg
+- Malagasy Chronicles — publishing platform for Malagasy creators (Spring Boot, Next.js, PostgreSQL, Docker, Tailwind, OAuth2, OIDC, JWKS)
+  URL: https://mdg-chronicles.vercel.app
+
+## Contact
+Email: roxane.rakotoarimanana@gmail.com
+GitHub: https://github.com/AinaRoxane
+LinkedIn: https://linkedin.com/in/roxane-aina

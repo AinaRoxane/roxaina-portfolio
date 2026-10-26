@@ -2,7 +2,7 @@ import HeroImage from "./HeroImage";
 import { heroContent } from "./content";
 
 export default function HeroSection() {
-  const { greeting, title, description, email, cta } = heroContent;
+  const { greeting, title,  description, email, cta } = heroContent;
 
   return (
     <section

@@ -10,7 +10,7 @@ export const aboutContent = {
   paragraphs: [
     [
       { text: "I am currently a " },
-      { text: "Fullstack Developer", strong: true },
+      { text: "Full-Stack Developer", strong: true },
       { text: " at " },
       {
         text: "e-Fanamby",
@@ -22,12 +22,12 @@ export const aboutContent = {
     ],
     [
       {
-        text: "My journey is driven by a simple conviction: Madagascar doesn't just need to consume technology; it needs to build it. Whether I am building data-driven tools or creating a home for Malagasy storytellers, I focus on systems that are rooted in local realities.",
+        text: "My journey is driven by a simple conviction: Madagascar doesn't just need to consume technology; it needs to build it. I'm building shared infrastructure for Malagasy products — identity first, because it's the layer everything else depends on. Whether I am building data-driven tools or creating a home for Malagasy storytellers, I focus on systems that are rooted in local realities.",
       },
     ],
     [
       {
-        text: "I am at the beginning of my journey, and I am seeking opportunities—freelance projects, remote roles, or partnerships—where I can bring my fullstack skills and my creative vision to teams that want to build something meaningful.",
+        text: "I am early in my career and looking for teams building serious things — freelance projects, remote roles, or partnerships where I can bring both full-stack engineering and product vision.",
       },
     ],
   ],

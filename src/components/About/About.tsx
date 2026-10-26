@@ -27,9 +27,9 @@ export default function About() {
 
   return (
     <section id="about" className="md:col-span-6">
-      <SectionHeader title={title} />
+      <SectionHeader title={title} id="about" />
 
-      <div className="text-muted text-base text-[0.95rem]  text-justify leading-[1.5]">
+      <div className="text-muted text-base text-[0.95rem] text-justify leading-[1.5]">
         {paragraphs.map((segments, i) => (
           <p key={i} className="mb-6 last:mb-0">
             {segments.map(renderSegment)}
