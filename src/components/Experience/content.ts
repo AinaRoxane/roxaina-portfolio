@@ -47,5 +47,5 @@ export const experienceData: Record<string, Experience> = {
 export const navItems: { key: string; label: string }[] = [
   { key: "efanamby-fulltime", label: "e-Fanamby (2026)" },
   { key: "efanamby-intern", label: "e-Fanamby (2025)" },
-  { key: "outlier", label: "Outlier (2024–2025)" },
+  { key: "outlier", label: "Outlier (2024 – 2025)" },
 ];

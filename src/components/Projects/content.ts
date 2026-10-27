@@ -1,9 +1,9 @@
 export interface Project {
   name: string;
   official_name: string;
-  official_fonts: string;
+  official_fonts?: string;
   problematic: string;
-  description: string;
+  description: string[];
   tech: string[];
   url?: string;
 }
@@ -17,22 +17,61 @@ export const projectsContent: ProjectsContent = {
   title: "projects",
   projects: [
     {
-      name: "SSO",
-      official_fonts: "",
-      official_name: "MIJERY ID",
-      problematic: "Every Malagasy platform re-invents account linking, password storage, and \"forgot password\" flows — badly, because there's no shared identity provider for the region. Each team solves the same problems alone, with less security budget than the problem deserves.",
-      description: "MIJERY is a standalone OAuth2/OIDC identity provider for Malagasy applications. The authorization server implements the authorization-code flow with PKCE, issues RS256 JWTs validated via a public JWKS endpoint, and rotates opaque refresh tokens with single-use semantics.\n\nThe architecture pivot: the decisions that mattered were about identity boundaries, not token formats. The `sub` claim is the only account-linking key — never username or email, because both are mutable and reusable. Administrators provision identities through a console rather than public sign-up, closing \"who gets an account\" at the boundary. Clients integrate against a locale-aware `redirect_uri` template validated against an allowlist: a mismatch returns `invalid_grant` per RFC 6749 §4.1.3, and an unlisted locale returns `400`, so the redirect URI can never be steered by the request payload.",
-      tech: ["Spring Boot", "PostgreSQL", "OAuth2", "OIDC", "PKCE", "RS256", "JWKS"],
-      url: "https://mijery.mg",
-    },
-    {
-      name: "Chronicles",
-      official_fonts: "",
+      name: "Creativity & Culture",
       official_name: "Chronicles MG",
-      problematic: "Malagasy creators write in three languages, publish in two formats, and get paid through four incompatible payment rails. No existing platform handles all three. So creators trim their work to fit the platform — or stop publishing entirely.",
-      description: "Chronicles is a full-stack publishing platform for Malagasy creators — webnovels and webcomics, paid per chapter or by subscription, with payouts through the mobile money creators already use.\n\nThe engineering coordination: a provider-agnostic wallet reconciles MVola, Orange Money, Airtel Money, and Visa into a single auditable ledger, so a 70/30 split holds to the ariary even when a provider's callback arrives late. Two reading engines (paginated text and streamed image panels) share one entitlement model. Content protection is layered rather than bolted on: MIJERY-scoped chapter access validated per request, watermarked image proxying, and hotlink prevention. All moderation, payout reconciliation, and audit logs live in Chronicles Studio.\n\nFederated identity: authentication is delegated to MIJERY ID. Chronicles is a pure resource server validating RS256 JWTs offline via JWKS. Local accounts are linked by the `sub` claim only. The client-side interceptor handles silent 401 recovery with concurrency dedupe, so expired sessions recover invisibly.",
-      tech: ["Spring Boot", "PostgreSQL", "Next.js", "JWT", "Docker", "Cloudinary", "Tailwind", "OAuth2", "OIDC", "JWKS"],
+      official_fonts: "",
+
+      problematic:
+        "Malagasy creators publish in multiple languages and formats, but the tools available to them rarely bring publishing, reader access, and local payments together. Creators end up adapting their work to the platform rather than the platform adapting to their work.",
+
+      description: [
+        "Chronicles MG is a publishing platform for webnovels and webcomics. Creators publish chapter by chapter and offer subscriptions, while two reading engines paginated text for webnovels and panel-by-panel image delivery for webcomics share a common entitlement model for chapter access. Content protection combines MIJERY-scoped access validation, watermarked image delivery, and hotlink prevention.",
+
+        "Payments from MVola, Orange Money, Airtel Money, and Visa consolidate into a single auditable wallet, reconciled through a common ledger with a 70/30 revenue split; callbacks handle asynchronous provider responses without dropping or double-counting transactions. Chronicles Studio handles the operational side moderation, payout reconciliation, and audit logs. Authentication is delegated to MIJERY ID: Chronicles acts as a resource server, verifying RS256-signed JWTs against keys published at a JWKS endpoint, linking accounts by the stable `sub` claim, and deduplicating concurrent session-recovery requests on the client.",
+      ],
+
+      tech: [
+        "Next.js",
+        "Spring Boot",
+        "PostgreSQL",
+        "OAuth 2.0",
+        "OpenID Connect",
+        "JWT",
+        "JWKS",
+        "Docker",
+        "Cloudinary",
+        "Tailwind CSS",
+      ],
+
       url: "https://mdg-chronicles.vercel.app",
+    },
+
+    {
+      name: "Identity",
+      official_name: "MIJERY ID",
+      official_fonts: "",
+
+      problematic:
+        "Every Malagasy platform that manages user accounts faces the same challenges: authentication, account linking, password recovery, and access control. Without a shared identity provider, each team has to build and maintain them from scratch.",
+
+      description: [
+        "MIJERY ID is a standalone OAuth 2.0 / OpenID Connect identity provider for Malagasy applications, centralizing authentication so connected applications delegate sign-in rather than maintain their own identity systems. The authorization server implements the Authorization Code flow with PKCE, issues RS256-signed JWTs verifiable through a public JWKS endpoint, and rotates opaque refresh tokens with single-use semantics.",
+
+        "The key design decision is how identities are created and linked: each account is identified by a stable `sub` claim rather than a username or email address, either of which can change or be reassigned, and administrators provision identities through a dedicated console rather than through unrestricted public registration. Redirect handling is equally controlled each client uses a locale-aware `redirect_uri` template validated against an allowlist, invalid configurations are rejected, and unsupported locales return `400 Bad Request`, preventing request parameters from being abused to send users to unauthorized destinations.",
+      ],
+
+      tech: [
+        "Spring Boot",
+        "PostgreSQL",
+        "OAuth 2.0",
+        "OpenID Connect",
+        "PKCE",
+        "RS256",
+        "JWKS",
+        "Refresh Token Rotation",
+      ],
+
+      url: "https://roxaina.me",
     },
   ],
 };
