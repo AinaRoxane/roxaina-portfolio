@@ -26,8 +26,13 @@ export const experienceData: Record<string, Experience> = {
     dateTime: "2025-07",
     dateTimeEnd: "2025-12",
     bullets: [
-      "Built a desktop application that automatically generates match highlights using YOLO, Roboflow, FFmpeg, and Python (PySide).",
-      "Trained computer vision models to identify teams, players, and passes – enabling automated tactical analysis without manual video editing.",
+      "Built a cross-platform desktop application for football match analysis (Python, PySide6) that lets analysts tag game events on video, capture evidence, and sync everything to a Spring Boot backend through a REST API with JWT authentication.",
+      "Designed an automated clip pipeline with FFmpeg: it cuts a video sequence and screenshot around each tagged event, with an adaptive bitrate so every clip stays under a 20 MB upload limit. A batch mode generates clips for an entire match from a CSV of events.",
+      "Implemented an offline-first workflow: when the server is unreachable, analysts keep tagging events locally, with cached indicators and CSV export, then sync later. This kept the tool usable in the field with unreliable connectivity.",
+      "Built a voice-entry mode where analysts dictate events in French (“team A, player 10, successful tackle, 12:30”). A regex parser and fuzzy matching (RapidFuzz) map the speech onto 122 indicators, teams, and jersey numbers.",
+      "Built a bulk import system that matches hundreds of proof files to recorded game events by filename, validates them, and uploads them with automatic compression.",
+      "Developed computer vision modules (YOLO, Roboflow, OpenCV, EasyOCR) for player tracking, team identification by jersey color, and jersey-number reading, producing annotated match videos.",
+      "Added statistics and reporting: evolution graphs per indicator (Plotly) and downloadable PDF match reports.",
     ],
   },
   outlier: {

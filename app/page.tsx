@@ -17,11 +17,11 @@ export default function Home() {
         {/* Row 1: About + Image */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-16 items-start">
           <About />
-          <div className="md:col-span-6 flex items-center justify-center">
+          <div className="md:col-span-6 relative max-w-[80%] h-[400px] rounded-2xl overflow-hidden hidden md:flex md-ml-auto items-center justify-center">
             <img
               src="/images/hero_suit_and_stars.jpg"
               alt="Roxane Aina"
-              className="w-full max-w-md my-4 object-cover h-auto md:h-96"
+              className="object-cover block"
             />
           </div>
         </div>
