@@ -17,36 +17,6 @@ export const projectsContent: ProjectsContent = {
   title: "projects",
   projects: [
     {
-      name: "Creativity & Culture",
-      official_name: "Chronicles MG",
-      official_fonts: "",
-
-      problematic:
-        "Malagasy creators publish in multiple languages and formats, but the tools available to them rarely bring publishing, reader access, and local payments together. Creators end up adapting their work to the platform rather than the platform adapting to their work.",
-
-      description: [
-        "Chronicles MG is a publishing platform for webnovels and webcomics. Creators publish chapter by chapter and offer subscriptions, while two reading engines paginated text for webnovels and panel-by-panel image delivery for webcomics share a common entitlement model for chapter access. Content protection combines MIJERY-scoped access validation, watermarked image delivery, and hotlink prevention.",
-
-        "Payments from MVola, Orange Money, Airtel Money, and Visa consolidate into a single auditable wallet, reconciled through a common ledger with a 70/30 revenue split; callbacks handle asynchronous provider responses without dropping or double-counting transactions. Chronicles Studio handles the operational side moderation, payout reconciliation, and audit logs. Authentication is delegated to MIJERY ID: Chronicles acts as a resource server, verifying RS256-signed JWTs against keys published at a JWKS endpoint, linking accounts by the stable `sub` claim, and deduplicating concurrent session-recovery requests on the client.",
-      ],
-
-      tech: [
-        "Next.js",
-        "Spring Boot",
-        "PostgreSQL",
-        "OAuth 2.0",
-        "OpenID Connect",
-        "JWT",
-        "JWKS",
-        "Docker",
-        "Cloudinary",
-        "Tailwind CSS",
-      ],
-
-      url: "https://mdg-chronicles.vercel.app",
-    },
-
-    {
       name: "Identity",
       official_name: "MIJERY ID",
       official_fonts: "",
@@ -72,6 +42,35 @@ export const projectsContent: ProjectsContent = {
       ],
 
       url: "https://roxaina.me",
+    },
+    {
+      name: "Creativity & Culture",
+      official_name: "Chronicles MG",
+      official_fonts: "",
+
+      problematic:
+        "Malagasy creators publish in multiple languages and formats, but the tools available to them rarely bring publishing, reader access, and local payments together. Creators end up adapting their work to the platform rather than the platform adapting to their work.",
+
+      description: [
+        "Chronicles is a publishing platform for webnovels and webcomics. Creators publish chapter by chapter and offer subscriptions, while two reading engines paginated text for webnovels and panel-by-panel image delivery for webcomics share a common entitlement model for chapter access. Content protection combines MIJERY-scoped access validation, watermarked image delivery, and hotlink prevention.",
+
+        "Payments from MVola, Orange Money, Airtel Money, and Visa consolidate into a single auditable wallet, reconciled through a common ledger with a 70/30 revenue split; callbacks handle asynchronous provider responses without dropping or double-counting transactions. Chronicles Studio handles the operational side moderation, payout reconciliation, and audit logs. Authentication is delegated to MIJERY ID.",
+      ],
+
+      tech: [
+        "Next.js",
+        "Spring Boot",
+        "PostgreSQL",
+        "OAuth 2.0",
+        "OpenID Connect",
+        "JWT",
+        "JWKS",
+        "Docker",
+        "Cloudinary",
+        "Tailwind CSS",
+      ],
+
+      url: "https://mdg-chronicles.vercel.app",
     },
   ],
 };
