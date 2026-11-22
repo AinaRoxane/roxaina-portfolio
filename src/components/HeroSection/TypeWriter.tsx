@@ -6,6 +6,8 @@ const words = [":)", "^^", "ツ", ":>"];
 const typingSpeed = 250;
 const deletingSpeed = 150;
 const pauseTime = 2000;
+const initialDelay = 1000;
+const resumeDelay = 300;
 
 export default function TypeWriter({ isPaused = false }: { isPaused?: boolean }) {
   const [text, setText] = useState("");
@@ -13,15 +15,15 @@ export default function TypeWriter({ isPaused = false }: { isPaused?: boolean })
   const charIndexRef = useRef(0);
   const isDeletingRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasStartedRef = useRef(false);
 
   useEffect(() => {
-    function type() {
-      // While BigSquare is hovered, keep polling without advancing the animation.
-      if (isPaused) {
-        timerRef.current = setTimeout(type, 200);
-        return;
-      }
+    // Hovering the BigSquare freezes the animation: no timer is scheduled, so
+    // the indices stay exactly where they were and typing picks up from the
+    // same spot once the hover ends.
+    if (isPaused) return;
 
+    function type() {
       const currentWord = words[wordIndexRef.current];
 
       if (isDeletingRef.current) {
@@ -51,11 +53,20 @@ export default function TypeWriter({ isPaused = false }: { isPaused?: boolean })
       );
     }
 
-    timerRef.current = setTimeout(type, 1000);
+    timerRef.current = setTimeout(
+      type,
+      hasStartedRef.current ? resumeDelay : initialDelay
+    );
+    hasStartedRef.current = true;
+
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [isPaused]);
+
+  // While paused, render nothing at all: the heading shows only "Tongasoa",
+  // without the typed characters or the blinking cursor.
+  if (isPaused) return null;
 
   return (
     <span className="ml-3 inline-block min-w-[60px] text-left">

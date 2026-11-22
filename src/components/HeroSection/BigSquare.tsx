@@ -18,9 +18,11 @@ type TileId = "star" | "cloud" | "cat" | "code";
 
 type BigSquareProps = {
     className?: string;
+    onHoverStart?: () => void;
+    onHoverEnd?: () => void;
 };
 
-export default function BigSquare({ className = "w-48 md:w-64" }: BigSquareProps) {
+export default function BigSquare({ className = "w-48 md:w-64", onHoverStart, onHoverEnd }: BigSquareProps) {
     const rootRef = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState<TileId | null>(null);
 
@@ -55,6 +57,8 @@ export default function BigSquare({ className = "w-48 md:w-64" }: BigSquareProps
     return (
         <div
             ref={rootRef}
+            onMouseEnter={onHoverStart}
+            onMouseLeave={onHoverEnd}
             className={`bsq relative mx-auto aspect-[830/835] touch-manipulation select-none [-webkit-tap-highlight-color:transparent] ${className}`}
             role="img"
             aria-label="Illustration: a sparkle, a cloud, a black cat and a code symbol"
