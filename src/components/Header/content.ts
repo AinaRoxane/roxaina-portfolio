@@ -21,7 +21,7 @@ export const headerContent = {
       ],
     },
   ],
-  email: "roxane.rakotoarimanana@gmail.com",
+  email: "hello@roxaina.me",
   socials: {
     github: "https://github.com/AinaRoxane",
     linkedin: "https://linkedin.com/in/roxane-aina",
