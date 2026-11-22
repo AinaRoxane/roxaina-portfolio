@@ -7,7 +7,7 @@ const typingSpeed = 250;
 const deletingSpeed = 150;
 const pauseTime = 2000;
 
-export default function TypeWriter() {
+export default function TypeWriter({ isPaused = false }: { isPaused?: boolean }) {
   const [text, setText] = useState("");
   const wordIndexRef = useRef(0);
   const charIndexRef = useRef(0);
@@ -16,6 +16,12 @@ export default function TypeWriter() {
 
   useEffect(() => {
     function type() {
+      // While BigSquare is hovered, keep polling without advancing the animation.
+      if (isPaused) {
+        timerRef.current = setTimeout(type, 200);
+        return;
+      }
+
       const currentWord = words[wordIndexRef.current];
 
       if (isDeletingRef.current) {
@@ -49,7 +55,7 @@ export default function TypeWriter() {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, []);
+  }, [isPaused]);
 
   return (
     <span className="ml-3 inline-block min-w-[60px] text-left">

@@ -1,31 +1,28 @@
+"use client";
+
+import { useState } from "react";
 import { heroContent } from "./content";
 import TypeWriter from "./TypeWriter";
+import BigSquare from "./BigSquare";
+
 
 const { bio, ctaCv, ctaContact, email, marqueeText } = heroContent;
 
 export default function HeroSection() {
+  const [isBigSquareHovered, setIsBigSquareHovered] = useState(false);
+
   return (
     <section className="pt-16 pb-12 flex flex-col items-center text-center">
-      {/* Big Square (2x2 Grid) */}
-      <div className="w-48 h-48 md:w-64 md:h-64 grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 mb-10">
-        <div className="bg-gray-200 rounded-2xl border border-gray-300 flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer">
-          <span className="text-gray-400 text-xs">(Sparkle)</span>
-        </div>
-        <div className="bg-white rounded-2xl border border-gray-300 flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer">
-          <span className="text-gray-400 text-xs">(Cloud)</span>
-        </div>
-        <div className="bg-white rounded-2xl border border-gray-300 flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer">
-          <span className="text-gray-400 text-xs">(Cat)</span>
-        </div>
-        <div className="bg-gray-400 rounded-2xl flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-500 transition-all duration-300 cursor-pointer">
-          <span className="text-white font-mono text-xl md:text-2xl">&lt;/&gt;</span>
-        </div>
-      </div>
+      {/* Big Square (animated 2x2) */}
+      <BigSquare
+        className="w-48 md:w-64 mb-10"
+        onHoverChange={setIsBigSquareHovered}
+      />
 
       {/* Text Content */}
       <div className="max-w-3xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 flex items-center justify-center">
-          Tongasoa <TypeWriter />
+          Tongasoa <TypeWriter isPaused={isBigSquareHovered} />
         </h1>
 
         <p className="text-xl md:text-2xl font-medium mb-8 text-gray-900">
