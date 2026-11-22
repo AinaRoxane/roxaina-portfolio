@@ -16,7 +16,6 @@ export default function HeroSection() {
       {/* Big Square (animated 2x2) */}
       <BigSquare
         className="w-48 md:w-64 mb-10"
-        onHoverChange={setIsBigSquareHovered}
       />
 
       {/* Text Content */}

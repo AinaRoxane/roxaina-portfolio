@@ -90,7 +90,6 @@ export default function Experience() {
                   href="#"
                   className="inline-flex ml-auto justify-center items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
                 >
-                  Architecture
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -104,6 +103,8 @@ export default function Experience() {
                       d="M3 3h6v6H3zM15 15h6v6h-6zM15 3h6v6h-6zM9 6h6M6 9v6h9v-6"
                     />
                   </svg>
+
+                  voir l'architecture
                 </a>
               </div>
             </div>

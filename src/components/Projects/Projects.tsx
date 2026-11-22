@@ -123,7 +123,7 @@ export default function Projects() {
                         d="M3 3h6v6H3zM15 15h6v6h-6zM15 3h6v6h-6zM9 6h6M6 9v6h9v-6"
                       />
                     </svg>
-                    Architecture
+                    Voir l'architecture
                   </a>
                 </div>
               </div>

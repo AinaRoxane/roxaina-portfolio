@@ -1,51 +1,86 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties, MouseEvent as ReactMouseEvent, PointerEvent as ReactPointerEvent } from "react";
 
 /**
  * BigSquare — animated 2x2 hero artwork (sparkle / cloud / cat / code).
  *
- * - Pure CSS hover animations, so it works as a Server Component (no "use client").
+ * - Desktop: hover a tile to play its scene.
+ * - Mobile / touch: tap a tile to play its scene; tap it again, tap another tile,
+ *   or tap anywhere outside to stop it.
+ * - All animation is CSS. React only tracks which tile is active (class "bsq-on").
  * - Every class and keyframe is prefixed "bsq-" so nothing leaks into the rest of the site.
  * - Size it from outside with `className` (default: w-48 md:w-64, same as the old grid).
  */
 
+type TileId = "star" | "cloud" | "cat" | "code";
+
 type BigSquareProps = {
     className?: string;
-    /** Notified whenever the mouse enters or leaves the whole BigSquare area. */
-    onHoverChange?: (isHovered: boolean) => void;
 };
 
-export default function BigSquare({
-    className = "w-48 md:w-64",
-    onHoverChange,
-}: BigSquareProps) {
+export default function BigSquare({ className = "w-48 md:w-64" }: BigSquareProps) {
+    const rootRef = useRef<HTMLDivElement>(null);
+    const [active, setActive] = useState<TileId | null>(null);
+
+    // Touch: a tap outside the widget closes whatever scene is playing.
+    useEffect(() => {
+        const onDown = (e: PointerEvent) => {
+            if (rootRef.current && !rootRef.current.contains(e.target as Node)) setActive(null);
+        };
+        document.addEventListener("pointerdown", onDown);
+        return () => document.removeEventListener("pointerdown", onDown);
+    }, []);
+
+    // A click only counts as a "tap" when it did not come from a mouse (mouse uses hover).
+    const isTap = (e: ReactMouseEvent) => {
+        const type = (e.nativeEvent as PointerEvent).pointerType;
+        return type ? type !== "mouse" : window.matchMedia("(hover: none)").matches;
+    };
+
+    const bind = (id: TileId) => ({
+        onPointerEnter: (e: ReactPointerEvent) => {
+            if (e.pointerType === "mouse" || e.pointerType === "pen") setActive(id);
+        },
+        onPointerLeave: (e: ReactPointerEvent) => {
+            if (e.pointerType === "mouse" || e.pointerType === "pen") setActive((a) => (a === id ? null : a));
+        },
+        onClick: (e: ReactMouseEvent) => {
+            if (isTap(e)) setActive((a) => (a === id ? null : id));
+        },
+    });
+    const on = (id: TileId) => (active === id ? "bsq-on" : "");
+
     return (
         <div
-            className={`bsq relative mx-auto aspect-[830/835] ${className}`}
+            ref={rootRef}
+            className={`bsq relative mx-auto aspect-[830/835] touch-manipulation select-none [-webkit-tap-highlight-color:transparent] ${className}`}
             role="img"
             aria-label="Illustration: a sparkle, a cloud, a black cat and a code symbol"
-            onMouseEnter={() => onHoverChange?.(true)}
-            onMouseLeave={() => onHoverChange?.(false)}
         >
             <style dangerouslySetInnerHTML={{ __html: css }} />
 
             {/* Hover targets (tiles). The artwork SVG below is their later sibling,
-          so ".bsq-t-star:hover ~ svg .part" lets each tile drive its own artwork. */}
+          so ".bsq-t-star.bsq-on ~ svg .part" lets each tile drive its own artwork. */}
             <div
-                className="bsq-t-star absolute cursor-pointer rounded-[11%] bg-[#646464] transition-colors duration-300 hover:bg-blue-600"
+                className={`bsq-t-star absolute cursor-pointer rounded-[11%] bg-[#646464] transition-colors duration-300 ${on("star")}`}
+                {...bind("star")}
                 style={{ left: "3.614%", top: "0.958%", width: "46.386%", height: "46.108%" }}
             />
             <div
-                className="bsq-t-cloud bsq-tile absolute box-border cursor-pointer rounded-[13%] border-black bg-white transition-colors duration-300 hover:bg-blue-600"
+                className={`bsq-t-cloud bsq-tile absolute box-border cursor-pointer rounded-[13%] border-black bg-white transition-colors duration-300 ${on("cloud")}`}
+                {...bind("cloud")}
                 style={{ left: "53.373%", top: "0%", width: "46.024%", height: "47.186%" }}
             />
             <div
-                className="bsq-t-cat bsq-tile absolute box-border cursor-pointer rounded-[13%] border-black bg-white"
+                className={`bsq-t-cat bsq-tile absolute box-border cursor-pointer rounded-[13%] border-black bg-white ${on("cat")}`}
+                {...bind("cat")}
                 style={{ left: "3.494%", top: "50.659%", width: "45.904%", height: "45.629%" }}
             />
             <div
-                className="bsq-t-code absolute cursor-pointer rounded-[10%] bg-[#646464] transition-colors duration-300 hover:bg-blue-600"
+                className={`bsq-t-code absolute cursor-pointer rounded-[10%] bg-[#646464] transition-colors duration-300 ${on("code")}`}
+                {...bind("code")}
                 style={{ left: "53.253%", top: "50.539%", width: "46.506%", height: "46.347%" }}
             />
 
@@ -180,6 +215,8 @@ const css = `
     /* Root = size container, so tile borders scale with the widget */
     .bsq { container-type: inline-size; }
     .bsq-tile { border-width: max(1.5px, calc(100cqw * 4 / 830)); }
+    /* active tile background (same blue as before) */
+    .bsq-t-star.bsq-on, .bsq-t-cloud.bsq-on, .bsq-t-code.bsq-on { background-color: #2563eb; }
 
     /* The artwork SVG is a later sibling of the tiles, so
        "#tile:hover ~ svg .bsq-part" lets each tile drive its own artwork. */
@@ -188,58 +225,58 @@ const css = `
     /* ---- Star square: grow + 360° spin over 2s, stay big while hovered ---- */
     svg .bsq-star-scale, svg .bsq-star-spin { transform-box: view-box; transform-origin: 412px 381px; }
     svg .bsq-star-scale { transition: transform .4s ease-out; }
-    .bsq-t-star:hover ~ svg .bsq-star-scale { transform: scale(1.35); transition: transform 2s ease-in-out; }
-    .bsq-t-star:hover ~ svg .bsq-star-spin  { animation: bsq-spin 2s ease-in-out 1; }
+    .bsq-t-star.bsq-on ~ svg .bsq-star-scale { transform: scale(1.35); transition: transform 2s ease-in-out; }
+    .bsq-t-star.bsq-on ~ svg .bsq-star-spin  { animation: bsq-spin 2s ease-in-out 1; }
     @keyframes bsq-spin { to { transform: rotate(360deg); } }
 
     svg .bsq-cloud-a, svg .bsq-cloud-b { transition: transform .8s cubic-bezier(.34,1.56,.64,1); }
-    .bsq-t-star:hover ~ svg .bsq-cloud-a { transform: translateX(-40px); } /* bottom-left cloud moves left */
-    .bsq-t-star:hover ~ svg .bsq-cloud-b { transform: translateX(40px); }  /* top-right cloud moves right */
+    .bsq-t-star.bsq-on ~ svg .bsq-cloud-a { transform: translateX(-40px); } /* bottom-left cloud moves left */
+    .bsq-t-star.bsq-on ~ svg .bsq-cloud-b { transform: translateX(40px); }  /* top-right cloud moves right */
 
     /* ---- Cat square: crescent eyes, wiggling whiskers and tail ---- */
     svg .bsq-lid { transform: translateY(42px); transition: transform .3s ease-out; }
     svg .bsq-whisker.bsq-l { transform-origin: right center; }
     svg .bsq-whisker.bsq-r { transform-origin: left center; }
     svg .bsq-tail { transform-origin: 92% 88%; }
-    .bsq-t-cat:hover ~ svg .bsq-lid { transform: translateY(13px); }
-    .bsq-t-cat:hover ~ svg .bsq-whisker { animation: bsq-wiggle .4s ease-in-out infinite; }
-    .bsq-t-cat:hover ~ svg .bsq-whisker.bsq-r { animation-delay: .1s; }
-    .bsq-t-cat:hover ~ svg .bsq-tail { animation: bsq-wag .55s ease-in-out infinite; }
+    .bsq-t-cat.bsq-on ~ svg .bsq-lid { transform: translateY(13px); }
+    .bsq-t-cat.bsq-on ~ svg .bsq-whisker { animation: bsq-wiggle .4s ease-in-out infinite; }
+    .bsq-t-cat.bsq-on ~ svg .bsq-whisker.bsq-r { animation-delay: .1s; }
+    .bsq-t-cat.bsq-on ~ svg .bsq-tail { animation: bsq-wag .55s ease-in-out infinite; }
     @keyframes bsq-wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-16deg); } 75% { transform: rotate(16deg); } }
     @keyframes bsq-wag    { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-9deg); }  75% { transform: rotate(9deg); } }
 
     /* ---- Code square: icon grows ---- */
     svg .bsq-code-icon { transform-origin: center; transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
-    .bsq-t-code:hover ~ svg .bsq-code-icon { transform: scale(1.3); }
+    .bsq-t-code.bsq-on ~ svg .bsq-code-icon { transform: scale(1.3); }
 
     /* ---- Cloud square: big cloud fades out, Africa + Madagascar are outlined, then filled white ---- */
     svg .bsq-big-cloud { transition: opacity .35s ease, transform .35s ease; }
-    .bsq-t-cloud:hover ~ svg .bsq-big-cloud { opacity: 0; transform: translateY(30px); }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-big-cloud { opacity: 0; transform: translateY(30px); }
 
     svg .bsq-geo {
       fill: #fff; fill-opacity: 0; stroke: #fff; stroke-width: 7; stroke-linejoin: round; stroke-linecap: round;
       stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0;
       transition: opacity .15s, fill-opacity .15s, stroke-dashoffset .15s;
     }
-    .bsq-t-cloud:hover ~ svg .bsq-geo {
+    .bsq-t-cloud.bsq-on ~ svg .bsq-geo {
       opacity: 1; fill-opacity: 1; stroke-dashoffset: 0;
       transition: opacity .1s .1s, stroke-dashoffset .8s ease-in-out .15s, fill-opacity .4s ease-in .95s;
     }
-    .bsq-t-cloud:hover ~ svg .bsq-geo.bsq-mada {
+    .bsq-t-cloud.bsq-on ~ svg .bsq-geo.bsq-mada {
       transition: opacity .1s .5s, stroke-dashoffset .6s ease-in-out .5s, fill-opacity .4s ease-in 1.1s;
     }
 
     /* ---- Star finale: 2s after the star hover begins (spin done), play for 2s ---- */
-    .bsq-t-star:hover ~ .bsq-t-code { animation: bsq-code-blue 2s ease 2s 1 both; }
-    .bsq-t-star:hover ~ svg .bsq-lid { animation: bsq-smile 2s ease 2s 1 both; }
+    .bsq-t-star.bsq-on ~ .bsq-t-code { animation: bsq-code-blue 2s ease 2s 1 both; }
+    .bsq-t-star.bsq-on ~ svg .bsq-lid { animation: bsq-smile 2s ease 2s 1 both; }
     @keyframes bsq-code-blue { 0%,100% { background-color: #646464; } 15%,85% { background-color: #2563eb; } }
     @keyframes bsq-smile     { 0%,100% { transform: translateY(42px); } 15%,85% { transform: translateY(13px); } }
 
     svg .bsq-fx { opacity: 0; transform-box: fill-box; transform-origin: center; }
-    .bsq-t-star:hover ~ svg .bsq-twinkle    { animation: bsq-twinkle 1.8s ease-in-out 2s 1 both; }
-    .bsq-t-star:hover ~ svg .bsq-twinkle.bsq-t2 { animation: bsq-twinkle 1.7s ease-in-out 2.3s 1 both; }
-    .bsq-t-star:hover ~ svg .bsq-firework    { animation: bsq-burst 1s ease-out 2s 2 both; }
-    .bsq-t-star:hover ~ svg .bsq-firework.bsq-f2 { animation: bsq-burst 1s ease-out 2.25s 2 both; }
+    .bsq-t-star.bsq-on ~ svg .bsq-twinkle    { animation: bsq-twinkle 1.8s ease-in-out 2s 1 both; }
+    .bsq-t-star.bsq-on ~ svg .bsq-twinkle.bsq-t2 { animation: bsq-twinkle 1.7s ease-in-out 2.3s 1 both; }
+    .bsq-t-star.bsq-on ~ svg .bsq-firework    { animation: bsq-burst 1s ease-out 2s 2 both; }
+    .bsq-t-star.bsq-on ~ svg .bsq-firework.bsq-f2 { animation: bsq-burst 1s ease-out 2.25s 2 both; }
     @keyframes bsq-twinkle {
       0%   { opacity: 0; transform: scale(0) rotate(0deg); }
       20%  { opacity: 1; transform: scale(1.25) rotate(20deg); }
@@ -258,8 +295,8 @@ const css = `
     /* ---- Cloud square epilogue (starts once Africa is drawn, ~1.5s): cat watches a sprout unfurl ---- */
     svg .bsq-cat  { transition: transform .3s ease-out; }
     svg .bsq-eyes { transition: transform .3s ease-out; }
-    .bsq-t-cloud:hover ~ svg .bsq-cat  { transform: translateX(-5px); transition: transform .5s ease-in-out 1.5s; }
-    .bsq-t-cloud:hover ~ svg .bsq-eyes { transform: translateX(-7px); transition: transform .5s ease-in-out 1.5s; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-cat  { transform: translateX(-5px); transition: transform .5s ease-in-out 1.5s; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-eyes { transform: translateX(-7px); transition: transform .5s ease-in-out 1.5s; }
 
     svg .bsq-sprout, svg .bsq-stem, svg .bsq-leaf, svg .bsq-mound { transform-box: view-box; }
     svg .bsq-sprout { transform-origin: 110px 988px; }
@@ -268,13 +305,13 @@ const css = `
     svg .bsq-leaf   { transform-origin: 110px 878px; transform: scale(0); }
     svg .bsq-mound  { transform-origin: 110px 990px; transform: scaleX(0); }
 
-    .bsq-t-cloud:hover ~ svg .bsq-sprout { animation: bsq-sprout-bend 1.8s ease-out 1.8s 1 both; }  /* leans toward the cat, then stands */
-    .bsq-t-cloud:hover ~ svg .bsq-stem   { animation: bsq-stem-grow 1.8s ease-out 1.8s 1 both; }
-    .bsq-t-cloud:hover ~ svg .bsq-tip    { animation: bsq-tip-rise 1.8s ease-out 1.8s 1 both; }
-    .bsq-t-cloud:hover ~ svg .bsq-leaf.bsq-l { animation: bsq-leaf-l .9s cubic-bezier(.34,1.4,.64,1) 2.7s 1 both; }  /* leaves unfurl */
-    .bsq-t-cloud:hover ~ svg .bsq-leaf.bsq-r { animation: bsq-leaf-r .9s cubic-bezier(.34,1.4,.64,1) 2.8s 1 both; }
-    .bsq-t-cloud:hover ~ svg .bsq-mound  { animation: bsq-mound-pop .4s ease-out 1.7s 1 both; }
-    .bsq-t-cloud:hover ~ svg .bsq-lid    { animation: bsq-blink .7s ease-in-out 3s 1; }  /* blink just before the sprout stands (~3.6s) */
+    .bsq-t-cloud.bsq-on ~ svg .bsq-sprout { animation: bsq-sprout-bend 1.8s ease-out 1.8s 1 both; }  /* leans toward the cat, then stands */
+    .bsq-t-cloud.bsq-on ~ svg .bsq-stem   { animation: bsq-stem-grow 1.8s ease-out 1.8s 1 both; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-tip    { animation: bsq-tip-rise 1.8s ease-out 1.8s 1 both; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-leaf.bsq-l { animation: bsq-leaf-l .9s cubic-bezier(.34,1.4,.64,1) 2.7s 1 both; }  /* leaves unfurl */
+    .bsq-t-cloud.bsq-on ~ svg .bsq-leaf.bsq-r { animation: bsq-leaf-r .9s cubic-bezier(.34,1.4,.64,1) 2.8s 1 both; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-mound  { animation: bsq-mound-pop .4s ease-out 1.7s 1 both; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-lid    { animation: bsq-blink .7s ease-in-out 3s 1; }  /* blink just before the sprout stands (~3.6s) */
 
     @keyframes bsq-sprout-bend { 0% { transform: rotate(34deg); } 60% { transform: rotate(14deg); } 100% { transform: rotate(0); } }
     @keyframes bsq-stem-grow   { from { transform: scaleY(0); } to { transform: scaleY(1); } }
@@ -292,8 +329,8 @@ const css = `
 
     /* ---- Sprout companions: slow twinkling stars (stay while hovered) ---- */
     svg .bsq-sstar, svg .bsq-sstar-p { transform-box: view-box; opacity: 0; }
-    .bsq-t-cloud:hover ~ svg .bsq-sstar   { animation: bsq-star-in .8s ease-out var(--d) 1 both; }
-    .bsq-t-cloud:hover ~ svg .bsq-sstar-p { animation: bsq-slow-twinkle 3.6s ease-in-out var(--d) infinite; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-sstar   { animation: bsq-star-in .8s ease-out var(--d) 1 both; }
+    .bsq-t-cloud.bsq-on ~ svg .bsq-sstar-p { animation: bsq-slow-twinkle 3.6s ease-in-out var(--d) infinite; }
     @keyframes bsq-star-in { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
     @keyframes bsq-slow-twinkle {
       0%, 100% { opacity: 1;   transform: scale(1)   rotate(0deg); }
