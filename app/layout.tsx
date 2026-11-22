@@ -21,9 +21,9 @@ const personSchema = {
   url: "https://roxaina.me",
   jobTitle: "Développeuse Full-Stack & Autrice",
   description:
-    "Développeuse full-stack et autrice basée à Antananarivo, Madagascar. Conceçoit des plateformes data-driven avec Spring Boot, Next.js et PostgreSQL. Ouverte au remote et au freelance.",
+    "Développeuse Full-Stack basée à Madagascar. Spécialisée dans les systèmes d'identité (OAuth2, JWT), le SaaS et les plateformes culturelles. Disponible en freelance et remote.",
   address: { "@type": "PostalAddress", addressCountry: "MG" },
-  email: "mailto:roxane.rakotoarimanana@gmail.com",
+  email: "mailto:hello@roxaina.me",
   knowsAbout: [
     "Spring Boot",
     "Next.js",
@@ -51,40 +51,16 @@ const personSchema = {
   ],
 };
 
-const projectSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Chronicles MG",
-  alternateName: "mdg-chronicles",
-  applicationCategory: "Édition",
-  operatingSystem: "Web",
-  description:
-    "Une plateforme de publication pour les créateurs malgaches avec paiements mobile-money natifs et partage des revenus 70/30.",
-  author: { "@type": "Person", name: "Roxane Aina" },
-  url: "https://mdg-chronicles.vercel.app",
-};
-
-const mijerySchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "MIJERY ID",
-  alternateName: "mijery-id",
-  applicationCategory: "Sécurité",
-  operatingSystem: "Web",
-  description:
-    "Un fournisseur d'identité OAuth2/OIDC autonome pour les applications malgaches. Implémente le flux authorization-code avec PKCE, des JWT RS256 validés via JWKS, et des refresh tokens à usage unique.",
-  author: { "@type": "Person", name: "Roxane Aina" },
-  url: "https://mijery.mg",
-};
-
 export const metadata: Metadata = {
-  title: "Roxane Aina · Portfolio",
+  title: "Roxane Aina · Dev Fullstack & Autrice",
+  // Changed meta description here:
   description:
-    "Développeuse full-stack & autrice basée à Antananarivo, Madagascar — ouverte au remote et au freelance. Spring Boot, Next.js, PostgreSQL. Actuellement Développeuse Full-Stack chez e-Fanamby.",
+    "Portfolio de Roxane Aina, développeuse Full-Stack basée à Madagascar. Spécialisée dans les systèmes d'identité (OAuth2, JWT), le SaaS et les plateformes culturelles. Disponible en freelance et remote.",
   openGraph: {
     title: "Roxane Aina",
+    // Updated for consistency
     description:
-      "Développeuse full-stack & autrice basée à Antananarivo, Madagascar — ouverte au remote et au freelance. Spring Boot, Next.js, PostgreSQL.",
+      "Portfolio de Roxane Aina, développeuse Full-Stack basée à Madagascar. Spécialisée dans les systèmes d'identité (OAuth2, JWT), le SaaS et les plateformes culturelles. Disponible en freelance et remote.",
     url: "https://roxaina.me",
     type: "website",
     locale: "fr_FR",
@@ -92,9 +68,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Roxane Aina — Développeuse Full-Stack",
+    title: "Roxane Aina · Dev Fullstack & Autrice",
+    // Updated for consistency
     description:
-      "Développeuse full-stack & autrice basée à Antananarivo, Madagascar — ouverte au remote et au freelance.",
+      "Portfolio de Roxane Aina, développeuse Full-Stack basée à Madagascar. Spécialisée dans les systèmes d'identité (OAuth2, JWT), le SaaS et les plateformes culturelles. Disponible en freelance et remote.",
   },
   alternates: {
     canonical: "https://roxaina.me",
@@ -116,16 +93,6 @@ export default function RootLayout({
           id="person-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
-        <Script
-          id="project-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
-        />
-        <Script
-          id="mijery-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(mijerySchema) }}
         />
         {children}
       </body>
