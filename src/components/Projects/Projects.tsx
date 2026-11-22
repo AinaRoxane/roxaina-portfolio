@@ -1,158 +1,130 @@
 import SectionHeader from "@/components/ui/SectionHeader";
-import { projectsContent } from "./content";
+import Screenshot from "@/components/ui/Screenshot";
+import { projectsData } from "./content";
 
 export default function Projects() {
-  const { title, projects } = projectsContent;
-
   return (
-    <section id="projects" className="mb-32">
-      <SectionHeader title={title} id="projects" />
+    <section id="projects" className="py-20 border-t border-gray-200 pt-20 mb-20">
+      <SectionHeader title="Projets" id="projects" />
 
-      <div className="flex flex-col gap-10 md:gap-14">
-        {projects.map((project) => {
+      <div className="flex flex-col gap-8 md:gap-12">
+        {projectsData.map((project) => {
           const linkProps = project.url
             ? {
-              href: project.url,
-              target: "_blank" as const,
-              rel: "noopener noreferrer",
-            }
+                href: project.url,
+                target: "_blank" as const,
+                rel: "noopener noreferrer" as const,
+              }
             : null;
 
           return (
             <article
-              key={project.name}
-              id={`project-${project.name
-                .replace(/\s+/g, "-")
-                .toLowerCase()}`}
-              className="group/project grid grid-cols-1 gap-6 md:grid-cols-[180px_minmax(0,1fr)] md:gap-14"
+              key={project.id}
+              id={`proj-${project.id}`}
+              className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-20"
             >
-              {/* Project identity */}
-              <aside className="md:border-r md:border-line md:pr-6">
-                <div className="md:sticky md:top-8">
+              {/* Col 1: project + category */}
+              <div className="md:col-span-3">
+                <h3 className="text-xl font-display font-bold text-gray-900">
+                  {project.company}
+                </h3>
+                <p className="text-sm text-gray-500 mt-1">
+                  {project.category}
+                </p>
+              </div>
+
+              {/* Col 2: screenshot + title + description */}
+              <div className="md:col-span-6 flex flex-col gap-6">
+                <Screenshot
+                  src={project.image}
+                  alt={`Screenshot ${project.company}`}
+                />
+                <div className="flex justify-between items-end border-b border-gray-200 pb-3">
+                  <h4 className="text-2xl font-display font-bold">
+                    {project.title}
+                  </h4>
                   {linkProps ? (
                     <a
                       {...linkProps}
-                      aria-label={`Visit ${project.official_name}`}
-                      className="inline-block text-sm font-medium italic text-ink transition-colors focus-visible:outline-none"
+                      className="text-blue-600 hover:text-blue-800 transition-colors font-medium text-sm flex items-center gap-1"
                     >
-                      {project.name}
-                    </a>
-                  ) : (
-                    <p className="text-sm font-medium italic text-ink">
-                      {project.name}
-                    </p>
-                  )}
-                </div>
-              </aside>
-
-              {/* Project details */}
-              <div className="min-w-0">
-                {/* Heading + external arrow: single click target */}
-                <div className="mb-5">
-                  {linkProps ? (
-                    <a
-                      {...linkProps}
-                      className="group/link inline-flex max-w-full flex-wrap items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:ring-offset-4"
-                    >
-                      <h3
-                        className="text-3xl font-semibold leading-tight tracking-tight text-ink underline-offset-4 group-has-[a:hover]/project:underline md:text-4xl"
-                        style={
-                          project.official_fonts
-                            ? {
-                              fontFamily: project.official_fonts.replace(
-                                /[\[\]]/g,
-                                "",
-                              ),
-                            }
-                            : undefined
-                        }
+                      Voir le projet
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        {project.official_name}
-                      </h3>
-
-                      <span
-                        aria-hidden="true"
-                        className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-ink/70 transition-colors group-hover/link:border-ink group-hover/link:text-ink"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="h-[18px] w-[18px] stroke-current"
-                          fill="none"
-                          strokeWidth={1.8}
+                        <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                        >
-                          <path d="M7 17 17 7" />
-                          <path d="M7 7h10v10" />
-                        </svg>
-                      </span>
+                          strokeWidth="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
                     </a>
                   ) : (
-                    <div className="inline-flex max-w-full flex-wrap items-center gap-3">
-                      <h3
-                        className="text-3xl font-semibold leading-tight tracking-tight text-ink md:text-4xl"
-                        style={
-                          project.official_fonts
-                            ? {
-                              fontFamily: project.official_fonts.replace(
-                                /[\[\]]/g,
-                                "",
-                              ),
-                            }
-                            : undefined
-                        }
-                      >
-                        {project.official_name}
-                      </h3>
-                    </div>
+                    <span className="text-blue-600 hover:text-blue-800 transition-colors font-medium text-sm flex items-center gap-1">
+                      Voir le projet
+                    </span>
                   )}
                 </div>
-
-                {/* Problem / context */}
-                <div className="mb-6">
-                  <p className="text-base leading-7 text-ink md:text-[0.95rem]">
-                    {project.problematic}
-                  </p>
-                </div>
-
-                {/* Solution and architecture */}
-                <div className="mb-6 flex flex-col gap-4">
-                  {project.description.map((paragraph, paragraphIndex) => (
-                    <p
-                      key={paragraphIndex}
-                      className="text-sm leading-7 text-muted md:text-[0.95rem] md:leading-8"
-                    >
-                      {paragraph.split(/(`[^`]+`)/g).map((part, partIndex) =>
-                        part.startsWith("`") && part.endsWith("`") ? (
-                          <code
-                            key={partIndex}
-                            className="rounded bg-ink/5 px-1.5 py-0.5 font-mono text-[0.88em] text-ink"
-                          >
-                            {part.slice(1, -1)}
-                          </code>
-                        ) : (
-                          part
-                        ),
-                      )}
-                    </p>
+                <div className="text-gray-600 text-sm space-y-4">
+                  {project.description.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
                   ))}
                 </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1.5 bg-white border border-gray-200 rounded-md text-sm font-medium text-gray-600 shadow-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-                {/* Technology stack */}
-                <div>
-                  <ul
-                    className="m-0 flex list-none flex-wrap gap-2 p-0"
-                    aria-label={`Technologies used by ${project.official_name}`}
-                  >
-                    {project.tech.map((technology) => (
-                      <li
-                        key={technology}
-                        className="rounded border border-line px-2.5 py-1.5 text-xs text-ink/80 transition-colors hover:border-ink/50"
-                      >
-                        {technology}
+              {/* Col 3: Pourquoi ? + Architecture button */}
+              <div className="md:col-span-3 flex flex-col justify-between">
+                {project.why && (
+                  <div className="mb-8">
+                    <h3 className="text-xl font-display font-bold text-gray-900 mb-4">
+                      Pourquoi ?
+                    </h3>
+                    <ul className="space-y-3 text-sm text-gray-500 list-disc list-outside ml-4 marker:text-gray-400">
+                      <li>
+                        <a
+                          href={project.why.href}
+                          className="hover:text-black transition-colors underline decoration-gray-300 underline-offset-4"
+                        >
+                          {project.why.label}
+                        </a>
                       </li>
-                    ))}
-                  </ul>
+                    </ul>
+                  </div>
+                )}
+                <div className="mt-auto">
+                  <a
+                    href="#"
+                    className="inline-flex ml-auto justify-end items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M3 3h6v6H3zM15 15h6v6h-6zM15 3h6v6h-6zM9 6h6M6 9v6h9v-6"
+                      />
+                    </svg>
+                    Architecture
+                  </a>
                 </div>
               </div>
             </article>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Dancing_Script } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 // Load the fonts
@@ -9,9 +9,9 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const dancingScript = Dancing_Script({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-dancing-script",
+  variable: "--font-space-grotesk",
 });
 
 const personSchema = {
@@ -19,9 +19,9 @@ const personSchema = {
   "@type": "Person",
   name: "Roxane Aina",
   url: "https://roxaina.me",
-  jobTitle: "Full-Stack Developer",
+  jobTitle: "Développeuse Full-Stack & Autrice",
   description:
-    "Full-stack developer and author based in Antananarivo, Madagascar. Builds data-driven platforms with Spring Boot, Next.js, and PostgreSQL. Open to remote & freelance.",
+    "Développeuse full-stack et autrice basée à Antananarivo, Madagascar. Conceçoit des plateformes data-driven avec Spring Boot, Next.js et PostgreSQL. Ouverte au remote et au freelance.",
   address: { "@type": "PostalAddress", addressCountry: "MG" },
   email: "mailto:roxane.rakotoarimanana@gmail.com",
   knowsAbout: [
@@ -46,8 +46,8 @@ const personSchema = {
     "https://linkedin.com/in/roxane-aina",
   ],
   hasOccupation: [
-    { "@type": "Occupation", name: "Full-Stack Developer", startDate: "2026-01" },
-    { "@type": "Occupation", name: "Software Engineer", startDate: "2025-07", endDate: "2025-12" },
+    { "@type": "Occupation", name: "Développeuse Full-Stack", startDate: "2026-01" },
+    { "@type": "Occupation", name: "Ingénieure Logiciel", startDate: "2025-07", endDate: "2025-12" },
   ],
 };
 
@@ -56,10 +56,10 @@ const projectSchema = {
   "@type": "SoftwareApplication",
   name: "Chronicles MG",
   alternateName: "mdg-chronicles",
-  applicationCategory: "Publishing",
+  applicationCategory: "Édition",
   operatingSystem: "Web",
   description:
-    "A publishing platform for Malagasy creators with native mobile-money payments and a 70/30 revenue split.",
+    "Une plateforme de publication pour les créateurs malgaches avec paiements mobile-money natifs et partage des revenus 70/30.",
   author: { "@type": "Person", name: "Roxane Aina" },
   url: "https://mdg-chronicles.vercel.app",
 };
@@ -69,10 +69,10 @@ const mijerySchema = {
   "@type": "SoftwareApplication",
   name: "MIJERY ID",
   alternateName: "mijery-id",
-  applicationCategory: "Security",
+  applicationCategory: "Sécurité",
   operatingSystem: "Web",
   description:
-    "A standalone OAuth2/OIDC identity provider for Malagasy applications. Implements authorization-code flow with PKCE, RS256 JWTs validated via JWKS, and single-use refresh tokens.",
+    "Un fournisseur d'identité OAuth2/OIDC autonome pour les applications malgaches. Implémente le flux authorization-code avec PKCE, des JWT RS256 validés via JWKS, et des refresh tokens à usage unique.",
   author: { "@type": "Person", name: "Roxane Aina" },
   url: "https://mijery.mg",
 };
@@ -80,21 +80,21 @@ const mijerySchema = {
 export const metadata: Metadata = {
   title: "Roxane Aina · Portfolio",
   description:
-    "Full-stack developer & author based in Antananarivo, Madagascar — open to remote & freelance. Spring Boot, Next.js, PostgreSQL. Currently Full-Stack Developer at e-Fanamby.",
+    "Développeuse full-stack & autrice basée à Antananarivo, Madagascar — ouverte au remote et au freelance. Spring Boot, Next.js, PostgreSQL. Actuellement Développeuse Full-Stack chez e-Fanamby.",
   openGraph: {
     title: "Roxane Aina",
     description:
-      "Full-stack developer & author based in Antananarivo, Madagascar — open to remote & freelance. Spring Boot, Next.js, PostgreSQL.",
+      "Développeuse full-stack & autrice basée à Antananarivo, Madagascar — ouverte au remote et au freelance. Spring Boot, Next.js, PostgreSQL.",
     url: "https://roxaina.me",
     type: "website",
-    locale: "en_US",
+    locale: "fr_FR",
     siteName: "roxaina.me",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Roxane Aina — Full-Stack Developer",
+    title: "Roxane Aina — Développeuse Full-Stack",
     description:
-      "Full-stack developer & author based in Antananarivo, Madagascar — open to remote & freelance.",
+      "Développeuse full-stack & autrice basée à Antananarivo, Madagascar — ouverte au remote et au freelance.",
   },
   alternates: {
     canonical: "https://roxaina.me",
@@ -108,19 +108,22 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${inter.variable} ${dancingScript.variable} h-full antialiased scroll-smooth`}
+      lang="fr"
+      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-bg text-ink font-sans leading-[1.6] antialiased">
+      <body className="min-h-full flex flex-col bg-bg text-ink font-sans leading-[1.6] antialiased selection:bg-blue-200 selection:text-blue-900">
         <Script
+          id="person-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
         <Script
+          id="project-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
         />
         <Script
+          id="mijery-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(mijerySchema) }}
         />

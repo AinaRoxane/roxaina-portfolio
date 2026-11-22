@@ -9,36 +9,28 @@ export default function Stack({ className }: StackProps) {
   const { title, intro, categories } = stackContent;
 
   return (
-    <section id="stack" className={`${className ?? ""} mb-26`}>
+    <section id="stack" className={`${className ?? ""} mb-20 border-t border-gray-200 pt-20`}>
       <SectionHeader title={title} id="stack" />
 
-      <p className="text-muted text-base text-[0.95rem] leading-[1.8] mb-6">{intro}</p>
+      <p className="text-gray-500 mb-10 text-base">{intro}</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
         {categories.map((cat) => (
-          <article
-            key={cat.category}
-            className="flex flex-col md:flex-row gap-10 md:gap-14 p-4 md:p-6 hover:bg-white/50 transition-colors"
-          >
-            {/* Left rail: category label (same style as experience/projects) */}
-            <div className="md:min-w-[180px] md:border-r md:border-line md:pr-6">
-              <span className="text-ink text-[0.9rem] font-medium italic block">
-                {cat.category}
-              </span>
-            </div>
-
-            {/* Right column: technologies list */}
-            <div className="flex-1">
-              <ul className="flex flex-wrap gap-2 list-none m-0 p-0">
-                {cat.technologies.map((tech) => (
-                  <li
-                    key={tech}
-                    className="text-xs text-muted border border-line rounded px-2 py-1"
-                  >
-                    {tech}
-                  </li>
-                ))}
-              </ul>
+          <article key={cat.category}>
+            <h3
+              className="font-display font-bold text-lg text-gray-900 mb-4 border-b border-gray-200 pb-2"
+            >
+              {cat.category}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {cat.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1.5 bg-white border border-gray-200 rounded-md text-sm font-medium text-gray-600 shadow-sm"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </article>
         ))}

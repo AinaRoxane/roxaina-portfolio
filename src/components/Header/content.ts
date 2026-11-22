@@ -1,11 +1,25 @@
 export const headerContent = {
   logo: "roxaina.me",
   nav: [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
+    { label: "Accueil", href: "#" },
+    { label: "À propos", href: "#about" },
     { label: "Stack", href: "#stack" },
-    { label: "Experience", href: "#experience" },
-    { label: "Projects", href: "#projects" },
+  ],
+  dropdowns: [
+    {
+      label: "Expérience",
+      items: [
+        { label: "e-Fanamby", href: "#exp-efanamby" },
+        { label: "Outlier.ai", href: "#exp-outlier" },
+      ],
+    },
+    {
+      label: "Projets",
+      items: [
+        { label: "Mijery ID", href: "#proj-mijery" },
+        { label: "Chronicles MG", href: "#proj-chronicles" },
+      ],
+    },
   ],
   email: "roxane.rakotoarimanana@gmail.com",
   socials: {

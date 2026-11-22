@@ -1,76 +1,68 @@
 export interface Project {
-  name: string;
-  official_name: string;
-  official_fonts?: string;
-  problematic: string;
+  id: string;
+  company: string;
+  category: string;
+  title: string;
   description: string[];
   tech: string[];
+  image?: string;
+  why?: { label: string; href: string };
   url?: string;
 }
 
-interface ProjectsContent {
-  title: string;
-  projects: Project[];
-}
-
-export const projectsContent: ProjectsContent = {
-  title: "projects",
-  projects: [
-    {
-      name: "Identity",
-      official_name: "MIJERY ID",
-      official_fonts: "",
-
-      problematic:
-        "Every Malagasy platform that manages user accounts faces the same challenges: authentication, account linking, password recovery, and access control. Without a shared identity provider, each team has to build and maintain them from scratch.",
-
-      description: [
-        "MIJERY ID is a standalone OAuth 2.0 / OpenID Connect identity provider for Malagasy applications, centralizing authentication so connected applications delegate sign-in rather than maintain their own identity systems. The authorization server implements the Authorization Code flow with PKCE, issues RS256-signed JWTs verifiable through a public JWKS endpoint, and rotates opaque refresh tokens with single-use semantics.",
-
-        "The key design decision is how identities are created and linked: each account is identified by a stable `sub` claim rather than a username or email address, either of which can change or be reassigned, and administrators provision identities through a dedicated console rather than through unrestricted public registration. Redirect handling is equally controlled each client uses a locale-aware `redirect_uri` template validated against an allowlist, invalid configurations are rejected, and unsupported locales return `400 Bad Request`, preventing request parameters from being abused to send users to unauthorized destinations.",
-      ],
-
-      tech: [
-        "Spring Boot",
-        "PostgreSQL",
-        "OAuth 2.0",
-        "OpenID Connect",
-        "PKCE",
-        "RS256",
-        "JWKS",
-        "Refresh Token Rotation",
-      ],
-
-      url: "https://roxaina.me",
+export const projectsData: Project[] = [
+  {
+    id: "mijery",
+    company: "Mijery ID",
+    category: "Identité & Sécurité",
+    title: "Fournisseur d'identité",
+    image: "/images/mijery-id.png",
+    description: [
+      "Chaque plateforme malgache fait face aux mêmes défis : authentification, liaison de comptes, récupération de mot de passe. Sans fournisseur partagé, chaque équipe doit tout construire.",
+      "MIJERY ID est un fournisseur OAuth 2.0 / OpenID Connect autonome. Il implémente le flux Authorization Code avec PKCE, émet des JWT signés RS256, et fait tourner les jetons de rafraîchissement.",
+    ],
+    tech: [
+      "Spring Boot",
+      "PostgreSQL",
+      "OAuth 2.0",
+      "OpenID Connect",
+      "PKCE",
+      "RS256",
+      "JWKS",
+      "Refresh Token Rotation",
+    ],
+    why: {
+      label: "L'identité numérique : bâtir la confiance et simplifier les usages",
+      href: "#",
     },
-    {
-      name: "Creativity & Culture",
-      official_name: "Chronicles MG",
-      official_fonts: "",
-
-      problematic:
-        "Malagasy creators publish in multiple languages and formats, but the tools available to them rarely bring publishing, reader access, and local payments together. Creators end up adapting their work to the platform rather than the platform adapting to their work.",
-
-      description: [
-        "Chronicles is a publishing platform for webnovels and webcomics. Creators publish chapter by chapter and offer subscriptions, while two reading engines paginated text for webnovels and panel-by-panel image delivery for webcomics share a common entitlement model for chapter access. Content protection combines MIJERY-scoped access validation, watermarked image delivery, and hotlink prevention.",
-
-        "Payments from MVola, Orange Money, Airtel Money, and Visa consolidate into a single auditable wallet, reconciled through a common ledger with a 70/30 revenue split; callbacks handle asynchronous provider responses without dropping or double-counting transactions. Chronicles Studio handles the operational side moderation, payout reconciliation, and audit logs. Authentication is delegated to MIJERY ID.",
-      ],
-
-      tech: [
-        "Next.js",
-        "Spring Boot",
-        "PostgreSQL",
-        "OAuth 2.0",
-        "OpenID Connect",
-        "JWT",
-        "JWKS",
-        "Docker",
-        "Cloudinary",
-        "Tailwind CSS",
-      ],
-
-      url: "https://mdg-chronicles.vercel.app",
+    url: "https://roxaina.me",
+  },
+  {
+    id: "chronicles",
+    company: "Chronicles MG",
+    category: "Créativité & Culture",
+    title: "Plateforme de publication",
+    image: "/images/chronicles-mg.png",
+    description: [
+      "Les créateurs malgaches publient dans plusieurs langues et formats, mais les outils disponibles ne rassemblent pas publication, accès lecteur et paiements locaux.",
+      "Chronicles est une plateforme pour webnovels et webcomics. Paiements MVola, Orange Money, Airtel et Visa consolidés dans un portefeuille auditable avec un partage 70/30.",
+    ],
+    tech: [
+      "Next.js",
+      "Spring Boot",
+      "PostgreSQL",
+      "OAuth 2.0",
+      "OpenID Connect",
+      "JWT",
+      "JWKS",
+      "Docker",
+      "Cloudinary",
+      "Tailwind CSS",
+    ],
+    why: {
+      label: "La culture, une infrastructure",
+      href: "#",
     },
-  ],
-};
+    url: "https://mdg-chronicles.vercel.app",
+  },
+];

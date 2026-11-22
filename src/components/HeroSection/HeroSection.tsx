@@ -1,49 +1,86 @@
-import HeroImage from "./HeroImage";
 import { heroContent } from "./content";
+import TypeWriter from "./TypeWriter";
+
+const { bio, ctaCv, ctaContact, email, marqueeText } = heroContent;
 
 export default function HeroSection() {
-  const { greeting, title,  description, email, cta } = heroContent;
-
   return (
-    <section
-      id="home"
-      className="min-h-[80vh] grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-10 items-center"
-    >
-      <HeroImage />
+    <section className="pt-16 pb-12 flex flex-col items-center text-center">
+      {/* Big Square (2x2 Grid) */}
+      <div className="w-48 h-48 md:w-64 md:h-64 grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 mb-10">
+        <div className="bg-gray-200 rounded-2xl border border-gray-300 flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer">
+          <span className="text-gray-400 text-xs">(Sparkle)</span>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-300 flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer">
+          <span className="text-gray-400 text-xs">(Cloud)</span>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-300 flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer">
+          <span className="text-gray-400 text-xs">(Cat)</span>
+        </div>
+        <div className="bg-gray-400 rounded-2xl flex items-center justify-center p-2 hover:scale-105 hover:bg-blue-500 transition-all duration-300 cursor-pointer">
+          <span className="text-white font-mono text-xl md:text-2xl">&lt;/&gt;</span>
+        </div>
+      </div>
 
-      <div>
-        <h1 className="text-[2.5rem] sm:text-[3.5rem] font-normal text-ink tracking-[-0.02em] mb-6 leading-[1.1]">
-          {greeting}
-          <span className="inline-block text-ink font-light ml-0.5 animate-blink">
-            |
-          </span>
+      {/* Text Content */}
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 flex items-center justify-center">
+          Tongasoa <TypeWriter />
         </h1>
 
-        <p className="text-[0.95rem] text-ink font-semibold my-1">
-          {title}
+        <p className="text-xl md:text-2xl font-medium mb-8 text-gray-900">
+          <strong className="font-bold">Roxane Aina</strong>,{" "}
+          <span className="text-blue-600 underline decoration-blue-600 decoration-2 underline-offset-4">
+            Développeuse
+          </span>{" "}
+          Full-Stack &{" "}
+          <span className="text-blue-600 underline decoration-blue-600 decoration-2 underline-offset-4">
+            Autrice
+          </span>.
         </p>
 
-        <p className="text-[0.95rem] text-muted max-w-[32rem] leading-[1.7] mb-8">
-          {description}
-        </p>
+        <p className="text-gray-600 leading-relaxed mb-10 text-lg">{bio}</p>
 
-        <a
-          href={`mailto:${email}`}
-          className="inline-flex items-center gap-3 px-6 py-3 rounded bg-ink text-white font-medium text-[0.9rem] transition-all duration-[250ms] hover:-translate-y-0.5"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-[18px] h-[18px] stroke-current"
-            fill="none"
-            strokeWidth={2}
+        <div className="flex flex-row items-center justify-center gap-3 sm:gap-4">
+          <a
+            href="/pdf/RoxaneAina_ProjectCreation.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg font-medium hover:border-blue-600 hover:text-blue-600 transition-colors text-sm sm:text-lg"
           >
-            <rect x="2" y="4" width="20" height="16" rx="2" />
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-          </svg>
-          <span>{cta}</span>
-        </a>
+            {ctaCv}
+          </a>
+          <a
+            href={`mailto:${email}`}
+            className="inline-flex items-center justify-center gap-2 bg-black text-white px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:text-lg"
+          >
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+            {ctaContact}
+          </a>
+        </div>
+      </div>
+
+      {/* Marquee / Ticker */}
+      <div className="w-full mt-16 border-y border-gray-300 py-4 overflow-hidden bg-gray-50">
+        <div className="animate-marquee">
+          <span
+            className="mx-6 text-sm font-medium tracking-widest text-gray-500 uppercase"
+          >
+            {marqueeText}
+          </span>
+        </div>
       </div>
     </section>
   );

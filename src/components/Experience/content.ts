@@ -1,51 +1,35 @@
 export interface Experience {
-  title: string;
+  id: string;
   company: string;
-  date: string;
-  dateTime?: string;
-  dateTimeEnd?: string;
+  dates: string[];
+  title: string;
   bullets: string[];
+  image?: string;
+  why?: { label: string; href: string };
 }
 
-export const experienceData: Record<string, Experience> = {
-  "efanamby-fulltime": {
+export const experienceData: Experience[] = [
+  {
+    id: "efanamby",
+    company: "e-Fanamby",
+    dates: ["Janv. 2026 – Présent", "Juil. 2025 – Déc. 2025"],
     title: "Full-Stack Developer",
-    company: "@ e-Fanamby",
-    date: "January 2026 – Present",
-    dateTime: "2026-01",
+    image: "/images/e-fanamby.png",
     bullets: [
-      "Architected and developed a full-stack football analytics SaaS platform using Spring Boot, Next.js, and PostgreSQL, processing over 160 hierarchical performance indicators across 19 annotated matches and 400+ profiled players, including data ingestion (forms/CSV), a dynamic player rating engine, video synchronization of actions, and a multilingual system (MG/FR/EN/ES).",
-      "Designed an automated highlights generation pipeline capable of relying on videos from YouTube, Google Drive, a local VPS, or external S3 storage, eliminating over 4 hours of manual editing per match.",
-      "Contributed to product-market fit by conducting market and cost analyses, leading a complete UI rebranding, and pitching the solution as a finalist at the POESAM 2026 awards.",
+      "Architecturé et développé une plateforme SaaS d'analyse de football (Spring Boot, Next.js, PostgreSQL), traitant plus de 160 indicateurs de performance sur 19 matchs et 400+ joueurs.",
+      "Conçu un pipeline automatisé de génération de moments forts (YouTube, Google Drive, S3), éliminant plus de 4 heures de montage manuel par match.",
+      "Contribué au product-market fit via des analyses de marché, une refonte complète de l'UI, et une pitch présenté comme finaliste aux POESAM 2026.",
     ],
+    why: { label: "Parier sur la data en Afrique", href: "#" },
   },
-  "efanamby-intern": {
-    title: "Software Engineer (Intern)",
-    company: "@ e-Fanamby",
-    date: "July 2025 – December 2025",
-    dateTime: "2025-07",
-    dateTimeEnd: "2025-12",
-    bullets: [
-      "Engineered a cross-platform desktop app (Python/PySide6) with an offline-first architecture, enabling analysts to tag video events locally and sync to a Spring Boot REST API when connectivity is restored.",
-      "Designed an automated media pipeline (FFmpeg) for clip/screenshot generation and built a voice-entry system using fuzzy matching (RapidFuzz) to map dictated French speech to 122 tactical indicators.",
-      "Developed computer vision modules (YOLO, OpenCV) for automated player tracking and jersey recognition, alongside Plotly/PDF reporting tools for match statistics.",
-    ],
-  },
-  outlier: {
+  {
+    id: "outlier",
+    company: "Outlier.ai",
+    dates: ["Août 2024 – Janv. 2025"],
     title: "Linguistic AI Specialist",
-    company: "@ Outlier",
-    date: "August 2024 – January 2025",
-    dateTime: "2024-08",
-    dateTimeEnd: "2025-01",
     bullets: [
-      "Trained and aligned Large Language Models (LLMs) via RLHF (Reinforcement Learning from Human Feedback) workflows.",
-      "Specialized in creative writing quality and French-English translation accuracy for AI training data generation.",
+      "Entraînement et alignement de modèles de langage (LLMs) via des workflows RLHF.",
+      "Spécialisation dans la qualité de l'écriture créative et la précision des traductions FR-EN.",
     ],
   },
-};
-
-export const navItems: { key: string; label: string }[] = [
-  { key: "efanamby-fulltime", label: "e-Fanamby (2026)" },
-  { key: "efanamby-intern", label: "e-Fanamby (2025)" },
-  { key: "outlier", label: "Outlier (2024 – 2025)" },
 ];

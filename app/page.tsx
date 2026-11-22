@@ -11,26 +11,10 @@ export default function Home() {
     <>
       <Header />
 
-      <main className="relative z-[1] max-w-[1200px] mx-auto px-12 sm:px-10 pb-16">
+      <main className="max-w-6xl mx-auto px-6">
         <HeroSection />
-
-        {/* Row 1: About + Image */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-16 items-start">
-          <About />
-          <div className="md:col-span-6 relative max-w-[80%] h-[400px] rounded-2xl overflow-hidden hidden md:flex md-ml-auto items-center justify-center">
-            <img
-              src="/images/hero_suit_and_stars.jpg"
-              alt="Roxane Aina"
-              className="object-cover block"
-            />
-          </div>
-        </div>
-
-        {/* Row 2: Stack */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-16 items-start">
-          <Stack className="md:col-span-12" />
-        </div>
-
+        <About />
+        <Stack />
         <Experience />
         <Projects />
         <Footer />

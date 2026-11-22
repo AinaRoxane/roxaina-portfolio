@@ -4,8 +4,8 @@ export interface TechCategory {
 }
 
 export const stackContent = {
-  title: "stack",
-  intro: "Here are some technologies I have been working with:",
+  title: "Stack",
+  intro: "Quelques technologies avec lesquelles je travaille :",
   categories: [
     {
       category: "Backend",
@@ -13,11 +13,11 @@ export const stackContent = {
     },
     {
       category: "Frontend",
-      technologies: ["Next.js", "React", "Svelte", "TypeScript", "Javascript", "Tailwind CSS", "Bootstrap CSS", "HTML", "CSS"],
+      technologies: ["Next.js", "React", "TypeScript", "Javascript", "Tailwind CSS", "Bootstrap CSS", "HTML", "CSS"],
     },
     {
       category: "Infrastructure & DevOps",
-      technologies: ["Docker", "Caddy", "Cloudinary", "FFmpeg", "Python (YOLO / Roboflow)"],
+      technologies: ["Docker", "Caddy", "Cloudinary", "FFmpeg", "Git", "Python (YOLO / Roboflow)"],
     },
     {
       category: "Security",
