@@ -10,7 +10,6 @@ export const headerContent = {
       label: "Expérience",
       items: [
         { label: "e-Fanamby", href: "#exp-efanamby" },
-        { label: "Outlier.ai", href: "#exp-outlier" },
       ],
     },
     {

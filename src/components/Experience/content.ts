@@ -22,14 +22,4 @@ export const experienceData: Experience[] = [
     ],
     why: { label: "Parier sur la data en Afrique", href: "#" },
   },
-  {
-    id: "outlier",
-    company: "Outlier.ai",
-    dates: ["Août 2024 – Janv. 2025"],
-    title: "Linguistic AI Specialist",
-    bullets: [
-      "Entraînement et alignement de modèles de langage (LLMs) via des workflows RLHF.",
-      "Spécialisation dans la qualité de l'écriture créative et la précision des traductions FR-EN.",
-    ],
-  },
 ];
