@@ -41,7 +41,7 @@ export default function HeroSection() {
 
         <div className="flex flex-row items-center justify-center gap-3 sm:gap-4">
           <a
-            href="/pdf/RoxaneAina_ProjectCreation.pdf"
+            href="/pdf/RoxaneAina_DevFullStack.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg font-medium hover:border-blue-600 hover:text-blue-600 transition-colors text-sm sm:text-lg"
