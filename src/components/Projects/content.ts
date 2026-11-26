@@ -63,6 +63,6 @@ export const projectsData: Project[] = [
       label: "La culture, une infrastructure",
       href: "#",
     },
-    url: "https://mdg-chronicles.vercel.app",
+    url: "https://chronicles-mg.roxaina.me",
   },
 ];
