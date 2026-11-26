@@ -35,7 +35,7 @@ export const projectsData: Project[] = [
       label: "L'identité numérique : bâtir la confiance et simplifier les usages",
       href: "#",
     },
-    url: "https://roxaina.me",
+    url: "#",
   },
   {
     id: "chronicles",
